@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5212D2EA218A2F8600B15C5A /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212D2E9218A2F8600B15C5A /* Items.swift */; };
+		5212D2EC218A2F9E00B15C5A /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212D2EB218A2F9E00B15C5A /* Categories.swift */; };
 		523BCFE42182A7C50063A95A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BCFE32182A7C50063A95A /* AppDelegate.swift */; };
 		523BCFE62182A7C50063A95A /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BCFE52182A7C50063A95A /* ToDoListViewController.swift */; };
 		523BCFE92182A7C50063A95A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 523BCFE72182A7C50063A95A /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5212D2E9218A2F8600B15C5A /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		5212D2EB218A2F9E00B15C5A /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		523BCFE02182A7C40063A95A /* Todoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		523BCFE32182A7C50063A95A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		523BCFE52182A7C50063A95A /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				523BD00621863D400063A95A /* DataModel.xcdatamodeld */,
+				5212D2EB218A2F9E00B15C5A /* Categories.swift */,
+				5212D2E9218A2F8600B15C5A /* Items.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -137,6 +143,7 @@
 				523BCFDC2182A7C40063A95A /* Sources */,
 				523BCFDD2182A7C40063A95A /* Frameworks */,
 				523BCFDE2182A7C40063A95A /* Resources */,
+				6E3A4B0D6CAC165BF1B96DE6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -216,6 +223,30 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6E3A4B0D6CAC165BF1B96DE6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Todoey/Pods-Todoey-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Todoey/Pods-Todoey-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -223,10 +254,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5212D2EA218A2F8600B15C5A /* Items.swift in Sources */,
 				523BD02B2187E26A0063A95A /* CategoryViewController.swift in Sources */,
 				523BCFE62182A7C50063A95A /* ToDoListViewController.swift in Sources */,
 				523BD00821863D410063A95A /* DataModel.xcdatamodeld in Sources */,
 				523BCFE42182A7C50063A95A /* AppDelegate.swift in Sources */,
+				5212D2EC218A2F9E00B15C5A /* Categories.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
