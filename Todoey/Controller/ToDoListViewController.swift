@@ -12,6 +12,8 @@ import RealmSwift
 
 class ToDoListViewController: UITableViewController {
 
+    // Attributes
+    
     // Using Realm object now
     var toDoItems : Results<Items>?
     let realm = try! Realm()
@@ -38,14 +40,19 @@ class ToDoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath) as! ItemTableCell
         
         if let cellItem = toDoItems?[indexPath.row] {
-            cell.textLabel?.text = cellItem.title
+            
+            //cell.textLabel?.text = cellItem.title
+            cell.titleLabel.text = cellItem.title
+            cell.createdDateLabel.text = cellItem.createdDate?.toString(dateFormat: "MM/dd/yyyy")
+            
             cell.accessoryType = cellItem.done ? .checkmark : .none
         }
         else {
-            cell.textLabel?.text = "No items yet"
+            //cell.textLabel?.text = "No items yet"
+            cell.titleLabel.text = "No items yet"
         }
         
         
@@ -98,7 +105,7 @@ class ToDoListViewController: UITableViewController {
                         try self.realm.write {
                             let newItem = Items()
                             newItem.title = textField.text!
-                            newItem.createdDate = NSDate()
+                            newItem.createdDate = Date()
                             currentCategory.items.append(newItem)
                         }
                     }catch {
@@ -153,7 +160,7 @@ class ToDoListViewController: UITableViewController {
     
     func loadRealm() {
         
-        toDoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
+        toDoItems = selectedCategory?.items.sorted(byKeyPath: "createdDate", ascending: true)
         tableView.reloadData()
     }
     
@@ -176,7 +183,7 @@ extension ToDoListViewController : UISearchBarDelegate {
 //        loadData(with: request, with: predicate)
         
         // Realm Methods
-        toDoItems = toDoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "title", ascending: true)
+        toDoItems = toDoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "createdDate", ascending: true)
         tableView.reloadData()
         
     }
@@ -195,3 +202,13 @@ extension ToDoListViewController : UISearchBarDelegate {
     
 }
 
+// MARK: - Date extender
+extension Date {
+    
+    func toString (dateFormat format: String) -> String {
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = format
+        return dateFormat.string(from: self)
+        
+    }
+}
