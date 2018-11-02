@@ -7,10 +7,11 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 import RealmSwift
+import SwipeCellKit
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController: SwipeTableViewController {
 
     // Handled by Realm
     var categoryArray: Results<Categories>?
@@ -35,9 +36,11 @@ class CategoryViewController: UITableViewController {
         return categoryArray?.count ?? 1
     }
     
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         cell.textLabel?.text = categoryArray?[indexPath.row].name ?? "No category added yet"
         
         return cell
@@ -68,11 +71,13 @@ class CategoryViewController: UITableViewController {
         let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Add Category", style: .default) { (action) in
             
+            // Core Data Implementation
 //            let newCategory = Category(context: self.context)
 //            newCategory.name = textField.text!
 //
 //            self.categoryArray.append(newCategory)
 //            self.saveData()
+            
             let newCategory = Categories()
             newCategory.name = textField.text!
             self.saveRealm(with: newCategory)
@@ -90,23 +95,23 @@ class CategoryViewController: UITableViewController {
     
     // MARK: - Data manipulation methods
     
-    func saveData() {
+//    func saveData() {
 //        do{
 //            try context.save()
 //        }catch{
 //            print("Error saving Category Data: \(error)")
 //        }
 //        tableView.reloadData()
-    }
+//    }
     
-    func loadData(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
+//   func loadData(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
 //        do {
 //            categoryArray = try context.fetch(request)
 //        }catch {
 //            print("Error fetching Category Data: \(error)")
 //        }
 //        tableView.reloadData()
-    }
+//    }
     
     func saveRealm(with categories: Categories){
         do {
@@ -121,9 +126,25 @@ class CategoryViewController: UITableViewController {
     
     func loadRealm() {
         
+        // Only need to call once. Then the results are connected to the Realm and self-updating
         categoryArray = realm.objects(Categories.self)
         
         tableView.reloadData()
+    }
+    
+    // Delete methods using Swipe
+    override func deleteAction(at indexPath: IndexPath) {
+        
+        if let categoryForDeletion = self.categoryArray?[indexPath.row]{
+            do {
+                try self.realm.write {
+                    self.realm.delete(categoryForDeletion)
+                }
+            }catch{
+                print("Error deleting category using Realm: \(error)")
+            }
+        }
+
     }
     
 }

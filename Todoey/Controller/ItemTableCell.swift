@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import SwipeCellKit
 
-class ItemTableCell: UITableViewCell {
+class ItemTableCell: SwipeTableViewCell {
     
     // Attributes
     @IBOutlet var titleLabel: UILabel!

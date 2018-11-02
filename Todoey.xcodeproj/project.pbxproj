@@ -10,6 +10,7 @@
 		5212D2EA218A2F8600B15C5A /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212D2E9218A2F8600B15C5A /* Items.swift */; };
 		5212D2EC218A2F9E00B15C5A /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212D2EB218A2F9E00B15C5A /* Categories.swift */; };
 		5212D2EE218B4F2000B15C5A /* ItemTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212D2ED218B4F2000B15C5A /* ItemTableCell.swift */; };
+		5212D2F0218BE7C500B15C5A /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212D2EF218BE7C500B15C5A /* SwipeTableViewController.swift */; };
 		523BCFE42182A7C50063A95A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BCFE32182A7C50063A95A /* AppDelegate.swift */; };
 		523BCFE62182A7C50063A95A /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BCFE52182A7C50063A95A /* ToDoListViewController.swift */; };
 		523BCFE92182A7C50063A95A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 523BCFE72182A7C50063A95A /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		5212D2E9218A2F8600B15C5A /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		5212D2EB218A2F9E00B15C5A /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		5212D2ED218B4F2000B15C5A /* ItemTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableCell.swift; sourceTree = "<group>"; };
+		5212D2EF218BE7C500B15C5A /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		523BCFE02182A7C40063A95A /* Todoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		523BCFE32182A7C50063A95A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		523BCFE52182A7C50063A95A /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		523BD000218549CB0063A95A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5212D2EF218BE7C500B15C5A /* SwipeTableViewController.swift */,
 				523BD02A2187E26A0063A95A /* CategoryViewController.swift */,
 				523BCFE52182A7C50063A95A /* ToDoListViewController.swift */,
 				5212D2ED218B4F2000B15C5A /* ItemTableCell.swift */,
@@ -235,15 +238,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Todoey/Pods-Todoey-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -257,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5212D2F0218BE7C500B15C5A /* SwipeTableViewController.swift in Sources */,
 				5212D2EA218A2F8600B15C5A /* Items.swift in Sources */,
 				523BD02B2187E26A0063A95A /* CategoryViewController.swift in Sources */,
 				523BCFE62182A7C50063A95A /* ToDoListViewController.swift in Sources */,
@@ -419,6 +427,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.SomedayApp.Todoey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -7,10 +7,11 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 import RealmSwift
+import SwipeCellKit
 
-class ToDoListViewController: UITableViewController {
+class ToDoListViewController: SwipeTableViewController {
 
     // Attributes
     
@@ -40,11 +41,11 @@ class ToDoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath) as! ItemTableCell
+        // First inherit from super class then downcast to customized ItemTableCell class
+        let cell = super.tableView(tableView, cellForRowAt: indexPath) as! ItemTableCell
         
         if let cellItem = toDoItems?[indexPath.row] {
             
-            //cell.textLabel?.text = cellItem.title
             cell.titleLabel.text = cellItem.title
             cell.createdDateLabel.text = cellItem.createdDate?.toString(dateFormat: "MM/dd/yyyy")
             
@@ -53,6 +54,7 @@ class ToDoListViewController: UITableViewController {
         else {
             //cell.textLabel?.text = "No items yet"
             cell.titleLabel.text = "No items yet"
+            cell.createdDateLabel.text = ""
         }
         
         
@@ -126,21 +128,21 @@ class ToDoListViewController: UITableViewController {
     }
     
     // MARK: - Data Manipulating Methods
-    
-    func saveData() {
-
+    // Core Data Implementation
+//    func saveData() {
+//
 //        do {
 //            try context.save()
 //        }catch {
 //            print("Error saving context: \(error)")
 //        }
-        
-        //tableView.reloadData()
-    }
+//
+//        tableView.reloadData()
+//    }
     
     // This function contains an internal and external and default parameters.
-    func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest(), with predicate: NSPredicate? = nil) {
-        
+//    func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest(), with predicate: NSPredicate? = nil) {
+//
 //        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
 //        if let otherPredicate = predicate {
 //            // Use CompoundPredicate to combine several predicates for query
@@ -154,9 +156,9 @@ class ToDoListViewController: UITableViewController {
 //        }catch {
 //            print("Error loading context: \(error)")
 //        }
-        
-        //tableView.reloadData()
-    }
+//
+//        tableView.reloadData()
+//    }
     
     func loadRealm() {
         
@@ -164,7 +166,25 @@ class ToDoListViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    // Delete method using Swipe
+    override func deleteAction(at indexPath: IndexPath) {
+        
+        if let itemForDeletion = toDoItems?[indexPath.row] {
+            do {
+                try realm.write {
+                    realm.delete(itemForDeletion)
+                }
+            } catch {
+                print("Error deleting item using Realm: \(error)")
+            }
+        }
+        
+    }
+    
 }
+
+
+
 // MARK: - Search Bar Delegate Functions
 
 extension ToDoListViewController : UISearchBarDelegate {
